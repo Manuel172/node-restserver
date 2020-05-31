@@ -15,4 +15,5 @@ if (process.env.NODE_ENV = 'dev') {
 } else {
     urlDB = 'mongodb+srv://administradorcafe:caffeCaribe@cluster0-hsccs.mongodb.net/cafe_dj';
 }
+urlDB = 'mongodb+srv://administradorcafe:caffeCaribe@cluster0-hsccs.mongodb.net/cafe_dj';
 process.env.urlDB = urlDB;

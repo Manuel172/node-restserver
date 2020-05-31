@@ -26,7 +26,7 @@ app.get('/usuario', function(req, res) {
                 });
             }
 
-            Musuario.count({ estado: true }, (err, conteo) => {
+            Musuario.countDocuments({ estado: true }, (err, conteo) => {
                 res.json({
                     ok: true,
                     cantidad: conteo,
