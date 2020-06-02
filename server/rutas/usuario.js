@@ -1,17 +1,17 @@
 const express = require('express');
 const Musuario = require('../modelos/musuario');
 const bcrypt = require('bcrypt');
+const { verificaToken, verificaAdmin_Role } = require('../middlewares/autorizacion');
 const _ = require('underscore');
 
 // para poder usar las rutas debe exportar el app mediante el module
 const app = express();
 
 // retornar listado de usuarios
-app.get('/usuario', function(req, res) {
+app.get('/usuario', verificaToken, (req, res) => {
 
     let desde = req.query.desde;
     desde = Number(desde);
-
     let limite = req.query.limite;
     limite = Number(limite);
 
@@ -30,6 +30,7 @@ app.get('/usuario', function(req, res) {
                 res.json({
                     ok: true,
                     cantidad: conteo,
+                    usuToken: req.tokenUsuario,
                     usuarios: respdata
                 }); //envia json
             });
@@ -37,7 +38,7 @@ app.get('/usuario', function(req, res) {
 });
 
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, verificaAdmin_Role], (req, res) => {
     //res.send('Hello World');  // envia html
     let body = req.body
 
@@ -59,13 +60,14 @@ app.post('/usuario', function(req, res) {
 
         res.json({
             ok: true,
+            usuToken: req.tokenUsuario,
             usuario: respData
         });
     });
 
 });
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
     let id = req.params.id;
     //let body = req.body;
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'rol', 'estado']);
@@ -83,6 +85,7 @@ app.put('/usuario/:id', function(req, res) {
         res.json({
             ok: "Put Data actualizada",
             id: id,
+            usuToken: req.tokenUsuario,
             usuario: respData
         });
     });
@@ -90,7 +93,7 @@ app.put('/usuario/:id', function(req, res) {
 
 });
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
     let id = req.params.id;
 
     // Eliminación fisica
@@ -119,6 +122,7 @@ app.delete('/usuario/:id', function(req, res) {
 
         res.json({
             ok: true,
+            usuToken: req.tokenUsuario,
             usuario: respElim
         });
     });

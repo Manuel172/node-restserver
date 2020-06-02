@@ -10,9 +10,10 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
-// llamar routes de usuario
-app.use(require('./rutas/usuario'));
 
+///////////// Llamar todas las routas/
+app.use(require('./rutas/index'));
+//////////////////////// fin rutas /////////////////////
 
 mongoose.connect(process.env.urlDB, {
     useNewUrlParser: true,
