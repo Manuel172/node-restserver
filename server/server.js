@@ -2,7 +2,7 @@ require('./config/config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const path = require('path');
 
 const app = express();
 
@@ -10,6 +10,11 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+
+//generamos path para utilizar una pagina
+app.use(express.static(path.resolve(__dirname, '../public')));
+console.log(path.resolve(__dirname, '../public'));
+
 
 ///////////// Llamar todas las routas/
 app.use(require('./rutas/index'));
