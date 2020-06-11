@@ -14,7 +14,7 @@ let verificaToken = (req, resp, next) => {
                 err: {
                     message: 'Token no es Válido'
                 }
-            })
+            });
         }
 
         req.tokenUsuario = decoded.usuario;

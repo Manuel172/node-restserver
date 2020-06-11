@@ -38,7 +38,7 @@ app.get('/usuario', verificaToken, (req, res) => {
 });
 
 
-app.post('/usuario', [verificaToken, verificaAdmin_Role], (req, res) => {
+app.post('/usuario', (req, res) => {
     //res.send('Hello World');  // envia html
     let body = req.body
 
@@ -60,7 +60,7 @@ app.post('/usuario', [verificaToken, verificaAdmin_Role], (req, res) => {
 
         res.json({
             ok: true,
-            usuToken: req.tokenUsuario,
+            //usuToken: req.tokenUsuario,
             usuario: respData
         });
     });

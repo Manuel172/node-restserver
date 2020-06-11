@@ -1,7 +1,7 @@
 //============================================
 // Expiración del Token // 60 seg * 60 min * 24horas * 30dias
 //============================================
-process.env.Caducidad = 60 * 60 * 24 * 30;
+process.env.Caducidad = '48h';
 
 //============================================
 // Seed / Semilla del token
