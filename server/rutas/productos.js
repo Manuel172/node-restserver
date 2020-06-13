@@ -196,7 +196,7 @@ app.delete('/productos/:id', [verificaToken, verificaAdmin_Role], (req, res) => 
     // se elimina logicamente con marca en estado
     mproductos.findByIdAndUpdate(id, cambiaDiponible, { new: true }, (err, respElim) => {
         if (err) {
-            return res.status(400).json({
+            return res.status(500).json({
                 ok: false,
                 err: err
             });
